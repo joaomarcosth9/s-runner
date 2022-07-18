@@ -8,7 +8,8 @@ parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('path', help='path to the source code file')
 parser.add_argument('-r', '--run', action='store_true', help='compile and run the file')
-parser.add_argument('-i', '--inputfile', default=None, help='inputfile name')
+parser.add_argument('-i', '--inputfile', default=None, help='inputfile name
+        (should be located at /tmp/)')
 args = vars(parser.parse_args())
 
 filename = args['path']
