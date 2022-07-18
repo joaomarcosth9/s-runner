@@ -23,7 +23,7 @@ optional arguments:
 Examples:
 
 ```
-s A.cpp # Just compile
-s B.cpp -r # Compile and run
-s C.cpp -r -i C.in # Compile and run with /tmp/C.in as input
+s A.cpp             # Just compile
+s B.cpp -r          # Compile and run
+s C.cpp -r -i C.in  # Compile and run with /tmp/C.in as input
 ```
