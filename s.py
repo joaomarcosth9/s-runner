@@ -48,7 +48,5 @@ elif('.py' in filename):
 elif('.rb' in filename):
     command = 'ruby '
     run_interpreted(filename, command, inputfile)
-
-elif('.hs' in filename):
-    command = 'ghci '
-    run_interpreted(filename, command, inputfile)
+else:
+    print("Filetype not supported.")
