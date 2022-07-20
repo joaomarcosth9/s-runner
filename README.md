@@ -24,7 +24,7 @@ optional arguments:
 Examples:
 
 ``` 
-s foo.cpp                  # Just compile
+s foo.cpp                  # Just compile to /tmp/foo
 s foo.cpp -r               # Compile and run
 s foo.cpp -r -i foo.in     # Compile and run with /tmp/foo.in as input
 ```
