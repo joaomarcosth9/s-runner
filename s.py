@@ -28,7 +28,7 @@ def run_interpreted(file, interpreter, infile):
         os.system(interpreter + file)
 
 if('.cpp' in filename):
-    command = 'g++ -Wall -lm --std=c++17 '
+    command = 'g++ -Wall -lm --std=c++17 -O2 '
     name = filename.split('/')[-1][:-4]
     os.system(command + filename + ' -o /tmp/' + name)
     if(run):
