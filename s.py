@@ -8,11 +8,13 @@ parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('path', help='path to the source code file')
 parser.add_argument('-r', '--run', action='store_true', help='run the executable after compiling')
+parser.add_argument('-f', '--fast', action='store_true', help='compile with less debugging flags (cpp only)')
 parser.add_argument('-i', '--inputs',nargs='+', default=None, help='input files (should be located at /tmp/)')
 args = vars(parser.parse_args())
 
 filename = args['path']
 run = args['run']
+fast = args['fast']
 inputs = args['inputs']
 command = ''
 name = ''
@@ -42,7 +44,10 @@ def runn():
         os.system(commandline)
 
 if('.cpp' in filename):
-    command = 'g++ -Wall -lm --std=c++17 -O2 '
+    if fast:
+        command = 'g++ -std=c++17 -Wshadow -O2 -Wno-unused-result '
+    else:
+        command = 'g++ -Wall -Wextra -pedantic -g -O2 -std=c++11 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector '
     name = filename.split('/')[-1][:-4]
     compile()
     compiled = 1
