@@ -9,7 +9,7 @@ Tip: add a symlink `ln -s ~/<path_to_script>/s.py /usr/bin/s`
 
 Help:
 ```
-usage: s [-h] [-r] [-i INPUTS [INPUTS ...]] path
+usage: s [-h] [-r] [-f] [-i INPUTS [INPUTS ...]] path
 
 s-runner by joaomarcosth9
 
@@ -19,9 +19,9 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   -r, --run             run the executable after compiling (default: False)
+  -f, --fast            compile with less debugging flags (cpp only) (default: False)
   -i INPUTS [INPUTS ...], --inputs INPUTS [INPUTS ...]
-                        input files (should be located at /tmp/) (default:
-                        None)
+                        input files (should be located at /tmp/) (default: None)
 ```
 
 Examples:
