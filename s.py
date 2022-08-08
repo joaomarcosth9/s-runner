@@ -7,46 +7,63 @@ import argparse
 parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('path', help='path to the source code file')
-parser.add_argument('-r', '--run', action='store_true', help='compile and run the file')
-parser.add_argument('-i', '--inputfile', default=None, help='inputfile name (should be located at /tmp/)')
+parser.add_argument('-r', '--run', action='store_true', help='run the executable after compiling')
+parser.add_argument('-i', '--inputs',nargs='+', default=None, help='input files (should be located at /tmp/)')
 args = vars(parser.parse_args())
 
 filename = args['path']
 run = args['run']
-inputfile = args['inputfile']
+inputs = args['inputs']
+command = ''
+name = ''
+compiled = 0
 
-def run_compiled(file, infile):
-    if infile:
-        os.system('/tmp/' + file + ' < /tmp/' + infile)
-    else: 
-        os.system('/tmp/' + file)
+def placeholder():
+    print("------------------")
 
-def run_interpreted(file, interpreter, infile):
-    if infile:
-        os.system(interpreter + file + ' < /tmp/' + infile)
-    else: 
-        os.system(interpreter + file)
+def compile():
+    os.system(command + filename + ' -o /tmp/' + name)
+
+def runn():
+    if compiled:
+        commandline = '/tmp/' + name
+    else:
+        commandline = command + filename
+    if inputs:
+        if len(inputs) == 1:
+            os.system(commandline + ' < /tmp/' + inputs[0])
+        else:
+            placeholder()
+            for infile in inputs:
+                print(f"# Test {inputs.index(infile) + 1}")
+                os.system(commandline + ' < /tmp/' + infile)
+                placeholder()
+    else:
+        os.system(commandline)
 
 if('.cpp' in filename):
     command = 'g++ -Wall -lm --std=c++17 -O2 '
     name = filename.split('/')[-1][:-4]
-    os.system(command + filename + ' -o /tmp/' + name)
+    compile()
+    compiled = 1
     if(run):
-        run_compiled(name, inputfile)
+        runn()
 
 elif('.c' in filename):
     command = 'gcc -lm '
     name = filename.split('/')[-1][:-2]
-    os.system(command + filename + ' -o /tmp/' + name)
+    compile()
+    compiled = 1
     if(run):
-        run_compiled(name, inputfile)
+        runn()
 
 elif('.py' in filename):
     command = 'python3 '
-    run_interpreted(filename, command, inputfile)
+    runn()
 
 elif('.rb' in filename):
     command = 'ruby '
-    run_interpreted(filename, command, inputfile)
+    runn()
+
 else:
     print("Filetype not supported.")
