@@ -37,7 +37,7 @@ def runn():
         else:
             placeholder()
             for infile in inputs:
-                print(f"# Test {inputs.index(infile) + 1}")
+                print(f"# Input {inputs.index(infile) + 1}")
                 os.system(commandline + ' < /tmp/' + infile)
                 placeholder()
     else:
@@ -47,7 +47,7 @@ if('.cpp' in filename):
     if fast:
         command = 'g++ -std=c++17 -Wshadow -O2 -Wno-unused-result '
     else:
-        command = 'g++ -Wall -Wextra -pedantic -g -O2 -std=c++11 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector '
+        command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -pedantic -g -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -DLOCAL_DEBUG '
     name = filename.split('/')[-1][:-4]
     compile()
     compiled = 1
