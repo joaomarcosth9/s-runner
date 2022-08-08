@@ -29,6 +29,6 @@ Examples:
 ``` 
 s foo.cpp                    # Just compile to /tmp/foo
 s foo.cpp -r                 # Compile and run
-s foo.cpp -r -i foo          # Compile and run with /tmp/foo as input
-s foo.cpp -r -i foo bar      # Compile and run with /tmp/foo and /tmp/bar as input
+s foo.cpp -r -i foo.in          # Compile and run with /tmp/foo.in as input
+s foo.cpp -r -i foo.in bar.in      # Compile and run with /tmp/foo.in and /tmp/bar.in as input
 ```
