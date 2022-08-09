@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-import os
-import sys
 import argparse
+
+import utils
 
 parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -12,63 +12,37 @@ parser.add_argument('-f', '--fast', action='store_true', help='compile with less
 parser.add_argument('-i', '--inputs',nargs='+', default=None, help='input files (should be located at /tmp/)')
 args = vars(parser.parse_args())
 
-filename = args['path']
+full_filename = args['path']
 run = args['run']
-fast = args['fast']
+cppfast = args['fast']
 inputs = args['inputs']
-command = ''
-name = ''
-compiled = 0
 
-def placeholder():
-    print("------------------")
+name, file_extension = full_filename.split('/')[-1].split('.')
 
-def compile():
-    os.system(command + filename + ' -o /tmp/' + name)
-
-def runn():
-    if compiled:
-        commandline = '/tmp/' + name
+if file_extension == 'cpp':
+    if cppfast:
+        command = 'g++ -std=c++17 -O2 -w '
     else:
-        commandline = command + filename
-    if inputs:
-        if len(inputs) == 1:
-            os.system(commandline + ' < /tmp/' + inputs[0])
-        else:
-            placeholder()
-            for infile in inputs:
-                print(f"# Input {inputs.index(infile) + 1}")
-                os.system(commandline + ' < /tmp/' + infile)
-                placeholder()
-    else:
-        os.system(commandline)
-
-if('.cpp' in filename):
-    if fast:
-        command = 'g++ -std=c++17 -Wshadow -O2 -Wno-unused-result '
-    else:
-        command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -pedantic -g -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector -DLOCAL_DEBUG '
-    name = filename.split('/')[-1][:-4]
-    compile()
-    compiled = 1
+        # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
+        # one, change it. If you don't, you can just leave as it is.
+        command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -Wno-unused-result -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -DLOCAL_DEBUG '
+    utils.compile(command, full_filename, name)
     if(run):
-        runn()
+        utils.run_compiled(name, inputs)
 
-elif('.c' in filename):
+elif file_extension == 'c':
     command = 'gcc -lm '
-    name = filename.split('/')[-1][:-2]
-    compile()
-    compiled = 1
+    utils.compile(command, full_filename, name)
     if(run):
-        runn()
+        utils.run_compiled(name, inputs)
 
-elif('.py' in filename):
+elif file_extension == 'py':
     command = 'python3 '
-    runn()
+    utils.run_interpreted(command, full_filename, inputs)
 
-elif('.rb' in filename):
+elif file_extension == 'rb':
     command = 'ruby '
-    runn()
+    utils.run_interpreted(command, full_filename, inputs)
 
 else:
     print("Filetype not supported.")
