@@ -50,7 +50,9 @@ pip install -r https://raw.github.com/joaomarcosth9/s-runner/main/requirements.t
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
 ```
 ## Uninstall
+```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/uninstall.sh)"
+```
 Or just:
 ```
 sudo rm -rf /opt/s-runner
