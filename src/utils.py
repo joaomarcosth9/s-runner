@@ -33,4 +33,4 @@ def run_interpreted(interpreter, full_path_to_file, input_directory, inputs_list
         system(interpreter + full_path_to_file)
 
 def nice_diff(file1_path, file2_path):
-    system('diff ' + file1_path + ' ' + file2_path + ' -u | /opt/diff-so-fancy')
+    system('diff ' + file1_path + ' ' + file2_path + ' -u | /opt/s-runner/src/diff-so-fancy/diff-so-fancy')

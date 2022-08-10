@@ -4,6 +4,13 @@ ok="[OK]"
 ast="[*]"
 error="[X]"
 
+if [[ ! $(command -v git) =~ 'git' ]]
+then
+    echo -e "\n$error Git not found...\n"
+    sleep 1
+    exit
+fi
+
 if [[ ! $(command -v python) =~ 'python' ]]
 then
     echo -e "\n$error Python not found...\n"
@@ -11,9 +18,9 @@ then
     exit
 fi
 
-if [[ ! $(command -v git) =~ 'git' ]]
+if [[ ! $(command -v perl) =~ 'perl' ]]
 then
-    echo -e "\n$error Git not found...\n"
+    echo -e "\n$error Perl (required for diff) not found...\n"
     sleep 1
     exit
 fi
@@ -27,7 +34,8 @@ then
     sudo rm -rf /opt/s-runner
 fi
 sudo git clone https://github.com/joaomarcosth9/s-runner/
-sudo chmod +x /opt/s-runner/src/s.py
+sudo chmod +x s-runner/src/s.py
+sudo chmod +x s-runner/src/diff-so-fancy/diff-so-fancy
 if [[ -f "/usr/bin/s" ]]
 then
     sudo rm -rf /usr/bin/s
