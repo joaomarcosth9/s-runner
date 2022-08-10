@@ -4,6 +4,8 @@ I don't like to have the binaries of my programs in the same directory as the so
 *New feature:* [Automatic codeforces testing](###-Codeforces-testing)
 
 - [1. Usage](##-Usage)
+- [2. Install](##-Install)
+- [3. Uninstall](##-Uninstall)
 
 ## Usage
 Help:
