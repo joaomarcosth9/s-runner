@@ -36,4 +36,6 @@ s wm.cpp -cf codeforces.com/problemset/problem/4/A    # Compile and run with CF 
 ```
 
 ## Install
+`bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"`
 
+## Uninstall
