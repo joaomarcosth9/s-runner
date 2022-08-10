@@ -7,7 +7,7 @@ try:
 except ImportError:
     from bs4 import BeautifulSoup
 
-bar = "[[[s-runner]]]" # what will replace the '/' character in URL parsing
+bar = "___s-runner___" # what will replace the '/' character in URL parsing
 s_runner_working_directory =  "/tmp/s-runner/"
 test_line_delimiter = '\n'
 
