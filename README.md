@@ -7,6 +7,7 @@ I don't like to have the binaries of my programs in the same directory as the so
 - [1. Usage](#usage)
 - [2. Install](#install)
 - [3. Uninstall](#uninstall)
+- [4. Notes](#notes)
 
 ## Usage
 Help:
@@ -58,3 +59,6 @@ Or just:
 sudo rm -rf /opt/s-runner
 sudo rm -f /usr/bin/s
 ```
+
+## Notes
+- You may need to change the first line of `src/s.py` to the path of your python interpreter. Just ensure that the `pip` command in your `$PATH` is related to the correct python interpreter.
