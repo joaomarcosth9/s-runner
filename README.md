@@ -42,7 +42,7 @@ Requirements:
   - bs4 (BeautifulSoup)
   - requests
 ```
-pip install -r "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt)"
+pip install -r "$(curl https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt)"
 ```
 ```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
