@@ -3,30 +3,33 @@ from os.path import exists
 import re
 
 try:
-    from BeautifulSoup import BeautifulSoup
+    from BeautifulSoup import BeautifulSoup # not sure if this is needed
 except ImportError:
     from bs4 import BeautifulSoup
 
-bar = "3ecf5d9f4e82b22c5dc5c95e2de39018"
-sep = "[[SEPARATOR]]"
-wd =  "/tmp/s-runner/"
+bar = "[[[s-runner]]]" # what will replace the '/' character in URL parsing
+s_runner_working_directory =  "/tmp/s-runner/"
+test_line_delimiter = '\n'
 
 def parse(url):
-    url = url.split('//')[-1]
+    url = url.split('//')[-1] # remove http(s) protocol
     url = url.replace('/',bar)
     return url
 
-
 def unparse(url):
     url = url.replace(bar,'/')
-    url = "http://"+url
+    url = "http://"+url # add http protocol
     return url
 
-def check_page_cache(problem):
-    path = wd+problem+'.html'
+def check_page_cache(problem_id):
+    # To speed up and not having to access codeforces.com every time,
+    # the problem page is cached. This function verifies if it's already
+    # cached, and if it isn't, it does.
+    full_problem_id = s_runner_working_directory+problem_id
+    path = full_problem_id+'.html'
     if not exists(path):
         try:
-            problem_page = requests.get(unparse(problem))
+            problem_page = requests.get(unparse(problem_id))
             html = problem_page.text
             with open(path, 'w') as file:
                 file.write(html)
@@ -34,72 +37,66 @@ def check_page_cache(problem):
             print("Something went wrong while checking codeforces page...")
             print(error)
 
-def check_input_output(problem):
-    inputfile = wd+problem+'.input'
-    outputfile = wd+problem+'.output'
+def check_input_output_cache(problem_id):
+    # Check if the problem's input and output are cached
+    # and if they aren't, it does.
+    full_problem_id = s_runner_working_directory+problem_id
+    inputfile = full_problem_id+'.input'
+    outputfile = full_problem_id+'.output' # Currently i'm not using the output for nothing actually.
     if not exists(inputfile) or not exists(outputfile):
-        check_page_cache(problem)
-        path = wd+problem+'.html'
+        check_page_cache(problem_id)
+        page_path = full_problem_id+'.html'
         try:
-            with open(path, 'r') as htmlfile:
-                parsed_html = BeautifulSoup(htmlfile, features='html.parser')
+            with open(page_path, 'r') as problem_page_html:
+                parsed_html = BeautifulSoup(problem_page_html, features='html.parser')
 
-                test_case_inputs = parsed_html.body.find(
+                # When the problem input gives a first line with the number of testcases
+                # the HTML of the input section is different, this three lines verify it.
+                has_first_line_testcases = parsed_html.body.find(
                     'div',attrs={'class':'input'}).find_all(
                         'div',attrs={'class':re.compile('test-example')})
 
-                if test_case_inputs:
-                    # first line with number of testcases
-                    inputs = parsed_html.body.findAll(
+                if has_first_line_testcases:
+                    all_input_boxes = parsed_html.body.findAll(
                         'div',attrs={'class':'input'})
-                    with open(inputfile, 'w') as file:
-                        i = 1
-                        for inputbox in inputs:
-                            with open(wd+problem+'.in'+str(i), 'w') as inputn:
+                    total = len(all_input_boxes)
+                    with open(inputfile, 'w') as real_input_file:
+                        for inputbox in all_input_boxes:
+                            with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
                                 parsed_testcases = inputbox.find_all(
                                     'div',attrs={'class':re.compile('test-example')})
                                 for line in parsed_testcases:
-                                    inputn.write(line.text+' ')
-                            i += 1
-                        file.write(str(i))
-
+                                    inputbox_number_i.write(line.text+test_line_delimiter)
+                        real_input_file.write(str(total))
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
-                    with open(outputfile, 'w') as file:
+                    with open(outputfile, 'w') as real_output_file:
                         for outputbox in outputs:
                             parsed_outputs = outputbox.find('pre')
                             for line in parsed_outputs.find_all('br'):
-                                line.replaceWith(delimiter)
-                            file.write(parsed_outputs.text)
-                            # file.write(sep)
+                                line.replaceWith(test_line_delimiter)
+                            real_output_file.write(parsed_outputs.text)
 
                 else:
-                    # no first line number of testcases
-                    # possibly various input boxes
-                    delimiter = '\n'
-                    inputs = parsed_html.body.findAll(
+                    all_input_boxes = parsed_html.body.findAll(
                         'div',attrs={'class':'input'})
-                    with open(inputfile, 'w') as file:
-                        i = 1
-                        for inputbox in inputs:
-                            with open(wd+problem+'.in'+str(i), 'w') as inputn:
+                    total = len(all_input_boxes)
+                    with open(inputfile, 'w') as real_input_file:
+                        for inputbox in all_input_boxes:
+                            with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
                                 parsed_input = inputbox.find('pre')
                                 for line in parsed_input.find_all('br'):
-                                    line.replaceWith(delimiter)
-                                inputn.write(parsed_input.text)
-                                # inputn.write(sep)
-                                i += 1
-                        file.write(str(i))
-
+                                    line.replaceWith(test_line_delimiter)
+                                inputbox_number_i.write(parsed_input.text)
+                        real_input_file.write(str(total))
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
-                    with open(outputfile, 'w') as file:
+                    with open(outputfile, 'w') as real_output_file:
                         for outputbox in outputs:
                             parsed_outputs = outputbox.find('pre')
                             for line in parsed_outputs.find_all('br'):
-                                line.replaceWith(delimiter)
-                            file.write(parsed_outputs.text)
-                            file.write(sep)
+                                line.replaceWith(test_line_delimiter)
+                            real_output_file.write(parsed_outputs.text)
 
         except Exception as err:
             print("Something went wrong while parsing input/output...")
@@ -110,4 +107,4 @@ if __name__ == '__main__':
     # just for testing
     url = input()
     parsed = parse(url)
-    check_input_output(parsed)
+    check_input_output_cache(parsed)

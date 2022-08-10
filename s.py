@@ -25,7 +25,7 @@ want_to_run_after_compiling = args['run']
 cpp_fast_compiling = args['fast'] # less g++ parameters (faster, but less safe)
 inputs_list = args['inputs']
 codeforces_online = args['codeforces']
-s_runner_working_directory = '/tmp/' # directory to throw compiled binaries and etc
+s_runner_working_directory = '/tmp/' # directory to throw compiled binaries, inputs and etc
 is_compiled_language = 1 # will make more sense later
 
 if not exists(path_to_file):
@@ -43,11 +43,11 @@ try:
             mkdir('/tmp/s-runner')
         s_runner_working_directory = '/tmp/s-runner/'
         problem_id = codeforces.parse(codeforces_online)
-        codeforces.check_input_output(problem_id)
+        codeforces.check_input_output_cache(problem_id)
         inputs_list = []
         with open(s_runner_working_directory+problem_id+'.input', 'r') as number_of_inputs:
             number = int(number_of_inputs.read())
-            for i in range (1,number):
+            for i in range (0,number):
                 inputs_list.append(problem_id+'.in'+str(i))
 
     # Now it's just filetype verification.
