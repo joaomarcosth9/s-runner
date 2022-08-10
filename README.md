@@ -1,8 +1,8 @@
 # s-runner
-
 I use this little program mostly for competitive programming, but it can be used for whatever you want.
 I don't like to have the binaries of my programs in the same directory as the source codes (I often try to open those binaries with vim). So to avoid having to type `g++ -lm --std=c++17 foo.cpp -o /tmp/foo && /tmp/foo < /tmp/foo.in` every time, I created this.
-
+*New feature:*
+- [Automatic codeforces testing](###-Codeforces-testing)
 ## Usage
 Help:
 ```
@@ -22,19 +22,18 @@ options:
   -cf CODEFORCES, --codeforces CODEFORCES
                         codeforces problem URL for automatic testing (default: None)
 ```
-
-Examples:
-
+## Examples:
 ``` 
 > s foo.cpp                         # Just compile to /tmp/foo
 > s foo.cpp -r                      # Compile and run
 > s foo.cpp -r -i foo.in            # Compile and run with /tmp/foo.in as input
 > s foo.cpp -r -i foo.in bar.in     # Compile and run with /tmp/foo.in and /tmp/bar.in as input
-
+```
+### Codeforces testing
+```
 > s wm.cpp -cf codeforces.com/problemset/problem/4/A    # Compile and run with CF testcases as input
 # It also accepts full urls (with https://...) 
 ```
-
 ## Install
 Requirements:
 - Git
@@ -45,10 +44,8 @@ Requirements:
 pip install -r https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
 ```
-
 ## Uninstall
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/uninstall.sh)"
-
 Or just:
 ```
 sudo rm -rf /opt/s-runner
