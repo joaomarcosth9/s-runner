@@ -32,3 +32,6 @@ s foo.cpp -r -i foo.in            # Compile and run with /tmp/foo.in as input
 s foo.cpp -r -i foo.in bar.in     # Compile and run with /tmp/foo.in and /tmp/bar.in as input
 s Watermelon.cpp -cf https://codeforces.com/problemset/problem/4/A     # Compile and run with CF testcases as input
 ```
+
+## Install
+
