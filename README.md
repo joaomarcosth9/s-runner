@@ -41,3 +41,10 @@ bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install
 ```
 
 ## Uninstall
+bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/uninstall.sh)"
+
+Or just:
+```
+sudo rm -rf /opt/s-runner
+sudo rm -f /usr/bin/s
+```
