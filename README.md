@@ -43,8 +43,6 @@ Requirements:
   - requests
 ```
 pip install -r https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt
-```
-```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
 ```
 
