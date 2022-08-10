@@ -33,7 +33,6 @@ def check_page_cache(problem):
         except Exception as error:
             print("Something went wrong while checking codeforces page...")
             print(error)
-            exit(1)
 
 def check_input_output(problem):
     inputfile = wd+problem+'.input'
@@ -62,7 +61,7 @@ def check_input_output(problem):
                                 for line in parsed_testcases:
                                     inputn.write(line.text+' ')
                             i += 1
-                        file.write(str(i-1))
+                        file.write(str(i))
 
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
@@ -89,8 +88,8 @@ def check_input_output(problem):
                                     line.replaceWith(delimiter)
                                 inputn.write(parsed_input.text)
                                 # inputn.write(sep)
-                            i += 1
-                        file.write(str(i-1))
+                                i += 1
+                        file.write(str(i))
 
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
@@ -105,13 +104,10 @@ def check_input_output(problem):
         except Exception as err:
             print("Something went wrong while parsing input/output...")
             print(err)
-            exit(1)
 
 
 if __name__ == '__main__':
     # just for testing
     url = input()
-    # url = "https://codeforces.com/contest/977/problem/E"
     parsed = parse(url)
-    # print(f"Parsed {parsed}")
     check_input_output(parsed)
