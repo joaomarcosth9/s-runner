@@ -1,8 +1,10 @@
 # s-runner
 I use this little program mostly for competitive programming, but it can be used for whatever you want.
 I don't like to have the binaries of my programs in the same directory as the source codes (I often try to open those binaries with vim). So to avoid having to type `g++ -lm --std=c++17 foo.cpp -o /tmp/foo && /tmp/foo < /tmp/foo.in` every time, I created this.
-*New feature:*
-- [Automatic codeforces testing](###-Codeforces-testing)
+*New feature:* [Automatic codeforces testing](###-Codeforces-testing)
+
+- [1. Usage](##-Usage)
+
 ## Usage
 Help:
 ```
