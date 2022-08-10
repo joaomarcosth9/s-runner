@@ -52,10 +52,10 @@ bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install
 ```
 Or just:
 ```
-cd /opt # or wherever you want to install it
+cd /opt
 sudo git clone https://github.com/joaomarcosth9/s-runner
 sudo chmod +x s-runner/src/s.py
-sudo ln -s /opt/s-runner/src/s.py /usr/bin/s # if it is installed to /opt
+sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
 ```
 ## Uninstall
 ```
