@@ -36,6 +36,14 @@ Examples:
 ```
 
 ## Install
+Requirements:
+- Git
+- Python3
+  - bs4 (BeautifulSoup)
+  - requests
+```
+pip install -r "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt)"
+```
 ```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
 ```
