@@ -31,3 +31,6 @@ def run_interpreted(interpreter, full_path_to_file, input_directory, inputs_list
                 placeholder_for_testcases()
     else:
         system(interpreter + full_path_to_file)
+
+def nice_diff(file1_path, file2_path):
+    system('diff ' + file1_path + ' ' + file2_path + ' -u | /opt/diff-so-fancy')

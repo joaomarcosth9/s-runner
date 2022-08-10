@@ -40,7 +40,7 @@ options:
 > s wm.cpp -cf codeforces.com/problemset/problem/4/A    # Compile and run with CF testcases as input
 # It also accepts full urls (with https://...) 
 ```
-## Install (currently only for GNU/Linux):
+## Install
 Requirements:
 - Git
 - Python3
@@ -57,6 +57,7 @@ sudo git clone https://github.com/joaomarcosth9/s-runner
 sudo chmod +x s-runner/src/s.py
 sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
 ```
+
 ## Uninstall
 ```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/uninstall.sh)"

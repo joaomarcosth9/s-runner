@@ -38,6 +38,7 @@ def check_page_cache(problem_id):
         except Exception as error:
             print("Something went wrong while checking codeforces page.")
             print(error)
+            exit(1)
 
 def check_input_output_cache(problem_id):
     # Check if the problem's input and output are cached
@@ -103,6 +104,16 @@ def check_input_output_cache(problem_id):
         except Exception as err:
             print("Something went wrong while parsing input/output.")
             print(err)
+            exit(1)
+
+
+# Future feature
+# def is_codeforces_file(file):
+#     with open(file, 'r') as source_code:
+#         if 'codeforces' in file.readlines()[0]:
+#             return True
+#         else:
+#             return False
 
 
 if __name__ == '__main__':
