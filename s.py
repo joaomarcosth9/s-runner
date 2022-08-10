@@ -2,7 +2,7 @@
 
 import argparse
 from os.path import exists
-from os import mkdir
+from os import mkdir,system
 
 import utils
 import codeforces
@@ -25,44 +25,49 @@ wd = '/tmp/'
 
 name, file_extension = full_filename.split('/')[-1].split('.')
 
-if cf:
-    run = True
-    wd = '/tmp/s-runner/'
-    if not exists(wd):
-        mkdir(wd)
-    problem = codeforces.parse(cf)
-    codeforces.check_input_output(problem)
-    new_inputs = []
-    with open(wd+problem+'.input', 'r') as nuinput:
-        number = int(nuinput.read())
-        for i in range (1,number+1):
-            new_inputs.append(problem+'.in'+str(i))
-            inputs = new_inputs
+try:
+    if cf:
+        run = True
+        wd = '/tmp/s-runner/'
+        if not exists(wd):
+            mkdir(wd)
+        problem = codeforces.parse(cf)
+        codeforces.check_input_output(problem)
+        new_inputs = []
+        with open(wd+problem+'.input', 'r') as nuinput:
+            number = int(nuinput.read())
+            for i in range (1,number+1):
+                new_inputs.append(problem+'.in'+str(i))
+                inputs = new_inputs
 
-if file_extension == 'cpp':
-    if cppfast:
-        command = 'g++ -std=c++17 -O2 -w '
+    if file_extension == 'cpp':
+        if cppfast:
+            command = 'g++ -std=c++17 -O2 -w '
+        else:
+            # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
+            # one, change it. If you don't, you can just leave as it is.
+            command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -Wno-unused-result -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -DLOCAL_DEBUG '
+        utils.compile(command, full_filename, name, wd)
+        if(run):
+            utils.run_compiled(name, wd, inputs)
+
+    elif file_extension == 'c':
+        command = 'gcc -lm '
+        utils.compile(command, full_filename, wd, name)
+        if(run):
+            utils.run_compiled(name, wd, inputs)
+
+    elif file_extension == 'py':
+        command = 'python3 '
+        utils.run_interpreted(command, full_filename, wd, inputs)
+
+    elif file_extension == 'rb':
+        command = 'ruby '
+        utils.run_interpreted(command, full_filename, wd, inputs)
+
     else:
-        # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
-        # one, change it. If you don't, you can just leave as it is.
-        command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -Wno-unused-result -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -DLOCAL_DEBUG '
-    utils.compile(command, full_filename, name, wd)
-    if(run):
-        utils.run_compiled(name, wd, inputs)
+        print("Filetype not supported.")
 
-elif file_extension == 'c':
-    command = 'gcc -lm '
-    utils.compile(command, full_filename, wd, name)
-    if(run):
-        utils.run_compiled(name, wd, inputs)
-
-elif file_extension == 'py':
-    command = 'python3 '
-    utils.run_interpreted(command, full_filename, wd, inputs)
-
-elif file_extension == 'rb':
-    command = 'ruby '
-    utils.run_interpreted(command, full_filename, wd, inputs)
-
-else:
-    print("Filetype not supported.")
+except:
+    print("Something went wrong.")
+    os.system("rm -rf /tmp/s-runner/*")
