@@ -30,11 +30,13 @@ def check_page_cache(problem_id):
     if not exists(path):
         try:
             problem_page = requests.get(unparse(problem_id))
+            if problem_page.status_code != 200:
+                raise Exception("Can't reach site URL.")
             html = problem_page.text
             with open(path, 'w') as file:
                 file.write(html)
         except Exception as error:
-            print("Something went wrong while checking codeforces page...")
+            print("Something went wrong while checking codeforces page.")
             print(error)
 
 def check_input_output_cache(problem_id):
@@ -99,7 +101,7 @@ def check_input_output_cache(problem_id):
                             real_output_file.write(parsed_outputs.text)
 
         except Exception as err:
-            print("Something went wrong while parsing input/output...")
+            print("Something went wrong while parsing input/output.")
             print(err)
 
 
