@@ -40,7 +40,7 @@ options:
 > s wm.cpp -cf codeforces.com/problemset/problem/4/A    # Compile and run with CF testcases as input
 # It also accepts full urls (with https://...) 
 ```
-## Install
+## Install (currently only for GNU/Linux):
 Requirements:
 - Git
 - Python3
