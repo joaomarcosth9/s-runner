@@ -55,7 +55,6 @@ Or just:
 cd /opt
 sudo git clone https://github.com/joaomarcosth9/s-runner
 sudo chmod +x s-runner/src/s.py
-sudo chmod +x s-runner/src/diff-so-fancy/diff-so-fancy
 sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
 ```
 
