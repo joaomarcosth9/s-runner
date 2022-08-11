@@ -17,7 +17,6 @@ parser.add_argument('-r', '--run', action='store_true', help='run the executable
 parser.add_argument('-f', '--fast', action='store_true', help='compile with less debugging flags (cpp only)')
 parser.add_argument('-i', '--inputs',nargs='+', default=None, help='input files (should be located at /tmp/)')
 parser.add_argument('-cf', '--codeforces', default=None, help='codeforces problem URL for automatic testing')
-parser.add_argument('-v', '--validate', action='store_true', help='check if your output is equal to with codeforces output')
 args = vars(parser.parse_args())
 
 # Putting command line arguments into variables
