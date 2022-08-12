@@ -63,14 +63,14 @@ def check_input_output_cache(problem_id):
                     all_input_boxes = parsed_html.body.findAll(
                         'div',attrs={'class':'input'})
                     total = len(all_input_boxes)
-                    with open(inputfile, 'w') as real_input_file:
+                    with open(inputfile, 'w') as number_of_inputs:
                         for inputbox in all_input_boxes:
                             with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
                                 parsed_testcases = inputbox.find_all(
                                     'div',attrs={'class':re.compile('test-example')})
                                 for line in parsed_testcases:
                                     inputbox_number_i.write(line.text+test_line_delimiter)
-                        real_input_file.write(str(total))
+                        number_of_inputs.write(str(total))
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
                     with open(outputfile, 'w') as real_output_file:
@@ -84,14 +84,14 @@ def check_input_output_cache(problem_id):
                     all_input_boxes = parsed_html.body.findAll(
                         'div',attrs={'class':'input'})
                     total = len(all_input_boxes)
-                    with open(inputfile, 'w') as real_input_file:
+                    with open(inputfile, 'w') as number_of_inputs:
                         for inputbox in all_input_boxes:
                             with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
                                 parsed_input = inputbox.find('pre')
                                 for line in parsed_input.find_all('br'):
                                     line.replaceWith(test_line_delimiter)
                                 inputbox_number_i.write(parsed_input.text)
-                        real_input_file.write(str(total))
+                        number_of_inputs.write(str(total))
                     outputs = parsed_html.body.findAll(
                         'div',attrs={'class':'output'})
                     with open(outputfile, 'w') as real_output_file:

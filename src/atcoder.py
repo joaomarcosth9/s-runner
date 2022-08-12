@@ -54,31 +54,25 @@ def check_input_output_cache(problem_id):
                 parsed_html = BeautifulSoup(problem_page_html, features='html.parser')
                 all_sections = parsed_html.body.findAll(
                     'section')
+                all_input_boxes = []
+                all_output_boxes = []
                 for section in all_sections:
                     if 'Sample Input' in section.text:
-                        print("in")
-                        print(section.find('pre').text)
+                        all_input_boxes.append(section.find('pre').text)
                     elif 'Sample Output' in section.text:
-                        print("out")
-                        print(section.find('pre').text)
-                inputs_outputs = []
-                # total = len(all_input_boxes)
-                # with open(inputfile, 'w') as real_input_file:
-                #     for inputbox in all_input_boxes:
-                #         with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
-                #             parsed_testcases = inputbox.find_all(
-                #                 'div',attrs={'class':re.compile('test-example')})
-                #             for line in parsed_testcases:
-                #                 inputbox_number_i.write(line.text+test_line_delimiter)
-                #     real_input_file.write(str(total))
-                # outputs = parsed_html.body.findAll(
-                #     'div',attrs={'class':'output'})
-                # with open(outputfile, 'w') as real_output_file:
-                #     for outputbox in outputs:
-                #         parsed_outputs = outputbox.find('pre')
-                #         for line in parsed_outputs.find_all('br'):
-                #             line.replaceWith(test_line_delimiter)
-                #         real_output_file.write(parsed_outputs.text)
+                        all_output_boxes.append(section.find('pre').text)
+                # print(inputs)
+                # print(outputs)
+
+                total = len(all_input_boxes)
+                with open(inputfile, 'w') as number_of_inputs:
+                    for inputbox in all_input_boxes:
+                        with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
+                                inputbox_number_i.write(inputbox)
+                    number_of_inputs.write(str(total))
+                with open(outputfile, 'w') as real_output_file:
+                    for outputbox in all_output_boxes:
+                        real_output_file.write(outputbox)
 
         except Exception as err:
             print("Something went wrong while parsing input/output.")
