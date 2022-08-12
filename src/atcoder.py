@@ -66,8 +66,8 @@ def check_input_output_cache(problem_id):
 
                 total = len(all_input_boxes)
                 with open(inputfile, 'w') as number_of_inputs:
-                    for inputbox in all_input_boxes:
-                        with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
+                    for index, inputbox in enumerate(all_input_boxes):
+                        with open(full_problem_id+'.in'+str(index), 'w') as inputbox_number_i:
                                 inputbox_number_i.write(inputbox)
                     number_of_inputs.write(str(total))
                 with open(outputfile, 'w') as real_output_file:

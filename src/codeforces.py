@@ -64,8 +64,8 @@ def check_input_output_cache(problem_id):
                         'div',attrs={'class':'input'})
                     total = len(all_input_boxes)
                     with open(inputfile, 'w') as number_of_inputs:
-                        for inputbox in all_input_boxes:
-                            with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
+                        for index, inputbox in enumerate(all_input_boxes):
+                            with open(full_problem_id+'.in'+str(index), 'w') as inputbox_number_i:
                                 parsed_testcases = inputbox.find_all(
                                     'div',attrs={'class':re.compile('test-example')})
                                 for line in parsed_testcases:
@@ -85,8 +85,8 @@ def check_input_output_cache(problem_id):
                         'div',attrs={'class':'input'})
                     total = len(all_input_boxes)
                     with open(inputfile, 'w') as number_of_inputs:
-                        for inputbox in all_input_boxes:
-                            with open(full_problem_id+'.in'+str(all_input_boxes.index(inputbox)), 'w') as inputbox_number_i:
+                        for index, inputbox in enumerate(all_input_boxes):
+                            with open(full_problem_id+'.in'+str(index), 'w') as inputbox_number_i:
                                 parsed_input = inputbox.find('pre')
                                 for line in parsed_input.find_all('br'):
                                     line.replaceWith(test_line_delimiter)

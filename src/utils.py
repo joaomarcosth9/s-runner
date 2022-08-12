@@ -12,8 +12,8 @@ def run_compiled(file_name, directory, inputs_list):
             system(directory + file_name + ' < ' + directory + inputs_list[0])
         else:
             placeholder_for_testcases()
-            for infile in inputs_list:
-                print(f"# Input {inputs_list.index(infile) + 1}")
+            for index, infile in enumerate(inputs_list):
+                print(f"# Output {index + 1}")
                 system(directory + file_name + ' < ' + directory + infile)
                 placeholder_for_testcases()
     else:
@@ -25,8 +25,8 @@ def run_interpreted(interpreter, full_path_to_file, input_directory, inputs_list
             system(interpreter + full_path_to_file + ' < ' + input_directory + inputs_list[0])
         else:
             placeholder_for_testcases()
-            for infile in inputs_list:
-                print(f"# Input {inputs_list.index(infile) + 1}")
+            for index, infile in enumerate(inputs_list):
+                print(f"# Output {index + 1}")
                 system(interpreter + full_path_to_file + ' < ' + input_directory + infile)
                 placeholder_for_testcases()
     else:
