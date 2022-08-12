@@ -32,6 +32,9 @@ if not exists(path_to_file):
     print(f"File {path_to_file} not found")
     exit(1)
 
+if inputs_list:
+    want_to_run_after_compiling = True
+
 file_name, file_extension = path_to_file.split('/')[-1].split('.')
 
 try:
