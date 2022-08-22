@@ -12,7 +12,7 @@ I don't like to have the binaries of my programs in the same directory as the so
 ## Usage
 Help:
 ```
-usage: s [-h] [-r] [-f] [-i INPUTS [INPUTS ...]] [-on ONLINE] path
+usage: s [-h] [-r] [-f] [-i INPUTS [INPUTS ...]] [-p PROBLEM] path
 
 s-runner by joaomarcosth9
 
@@ -27,7 +27,7 @@ options:
   -i INPUTS [INPUTS ...], --inputs INPUTS [INPUTS ...]
                         input files (should be located at /tmp/) (default:
                         None)
-  -on ONLINE, --online ONLINE
+  -p PROBLEM, --problem PROBLEM
                         problem URL for automatic testing (codeforces and
                         atcoder) (default: None)
 ```
