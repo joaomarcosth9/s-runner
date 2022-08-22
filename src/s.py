@@ -66,7 +66,7 @@ try:
         else:
             # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
             # one, change it. If you don't, you can just leave as it is.
-            command = 'g++ -std=c++17 -Wshadow -O2 -Wall -Wextra -Wno-unused-result -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -DLOCAL_DEBUG '
+            command = 'g++ -std=c++17 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -DLOCAL_DEBUG '
 
     elif file_extension == 'c':
         command = 'gcc -lm '
