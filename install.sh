@@ -11,7 +11,7 @@ then
     exit
 fi
 
-if [[ ! $(command -v python) =~ 'python' ]]
+if [[ ! $(command -v python) =~ 'python' && ! $(command -v python3) =~ 'python3' ]]
 then
     echo -e "\n$error Python not found...\n"
     sleep 1
