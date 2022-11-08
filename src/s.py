@@ -79,6 +79,10 @@ try:
         command = 'ruby '
         is_compiled_language = 0
 
+    elif file_extension == 'hs':
+        command = 'ghci '
+        is_compiled_language = 0
+
     else:
         print("Filetype not supported.")
     
