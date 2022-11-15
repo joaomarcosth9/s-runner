@@ -15,20 +15,19 @@ def compile_file(command_to_compile, full_path_to_file, destination_directory, s
 
 
 def run(file_name, directory, inputs_list, interpreter=""):
+    if interpreter:
+        command = interpreter + file_name
+    else:
+        command = directory + file_name
+
     if inputs_list:
         if len(inputs_list) > 1:
             placeholder_for_testcases()
         for index, infile in enumerate(inputs_list):
             if len(inputs_list) > 1:
                 print(f"# Output {index + 1}")
-            if interpreter:
-                system(interpreter + file_name + ' < ' + directory + infile)
-            else:
-                system(directory + file_name + ' < ' + directory + infile)
+            system(command + ' < ' + directory + infile)
             if len(inputs_list) > 1:
                 placeholder_for_testcases()
     else:
-        if interpreter:
-            system(interpreter + file_name)
-        else:
-            system(directory + file_name)
+        system(command)
