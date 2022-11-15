@@ -93,6 +93,7 @@ try:
     if is_compiled_language:
         if utils.compile_file(command, path_to_file, s_runner_working_directory, file_name) == 1:
             exit(1)
+        path_to_file = file_name
     else:
         want_to_run_after_compiling = True
 
