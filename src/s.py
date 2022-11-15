@@ -26,6 +26,8 @@ inputs_list = args['inputs']
 problem_url = args['problem']
 s_runner_working_directory = '/tmp/'  # directory to throw compiled binaries, inputs and etc
 is_compiled_language = 1  # will make more sense later
+command = ""
+interpreter = ""
 
 if not exists(path_to_file):
     print(f"File {path_to_file} not found")
@@ -60,7 +62,6 @@ try:
 
     # Now it's just filetype verification.
     # Currently supports C++,C, Python and Ruby, but it's really easy to add new languages.
-    command = ""
     if file_extension == 'cpp':
         if cpp_fast_compiling:
             command = 'g++ -std=c++17 -O2 -w '
@@ -75,27 +76,29 @@ try:
         command = 'gcc -lm '
 
     elif file_extension == 'py':
-        command = 'python3 '
+        interpreter = 'python3 '
         is_compiled_language = 0
 
     elif file_extension == 'rb':
-        command = 'ruby '
+        interpreter = 'ruby '
         is_compiled_language = 0
 
     elif file_extension == 'hs':
-        command = 'ghci '
+        interpreter = 'ghci '
         is_compiled_language = 0
 
     else:
         print("Filetype not supported.")
     
-    if is_compiled_language:  # <-- here
-        if utils.compile(command, path_to_file, s_runner_working_directory, file_name) == 1:
+    if is_compiled_language:
+        if utils.compile_file(command, path_to_file, s_runner_working_directory, file_name) == 1:
             exit(1)
-        if want_to_run_after_compiling:
-            utils.run_compiled(file_name, s_runner_working_directory, inputs_list)
     else:
-        utils.run_interpreted(command, path_to_file, s_runner_working_directory, inputs_list)
+        want_to_run_after_compiling = True
+
+    if want_to_run_after_compiling:
+        utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
+
 except Exception as error:
     # In case of something going wrong, it's safer to clean the online working directory for the next executions
     system("rm -rf /tmp/s-runner/*")
