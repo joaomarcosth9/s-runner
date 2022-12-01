@@ -75,14 +75,14 @@ def check_input_output_cache(problem_id):
                                 for line in parsed_testcases:
                                     inputbox_number_i.write(line.text + test_line_delimiter)
                         number_of_inputs.write(str(total))
-                    # outputs = parsed_html.body.findAll(
-                    #     'div', attrs={'class': 'output'})
-                    # with open(outputfile, 'w') as real_output_file:
-                    #     for outputbox in outputs:
-                    #         parsed_outputs = outputbox.find('pre')
-                    #         for line in parsed_outputs.find_all('br'):
-                    #             line.replaceWith(test_line_delimiter)
-                    #         real_output_file.write(parsed_outputs.text)
+                    outputs = parsed_html.body.findAll(
+                        'div', attrs={'class': 'output'})
+                    with open(outputfile, 'w') as real_output_file:
+                        for outputbox in outputs:
+                            parsed_outputs = outputbox.find('pre')
+                            for line in parsed_outputs.find_all('br'):
+                                line.replaceWith(test_line_delimiter)
+                            real_output_file.write(parsed_outputs.text)
 
                 else:
                     all_input_boxes = parsed_html.body.findAll(
@@ -96,22 +96,22 @@ def check_input_output_cache(problem_id):
                                     line.replaceWith(test_line_delimiter)
                                 inputbox_number_i.write(parsed_input.text)
                         number_of_inputs.write(str(total))
-                    # outputs = parsed_html.body.findAll(
-                    #     'div', attrs={'class': 'output'})
-                    # with open(outputfile, 'w') as real_output_file:
-                    #     for outputbox in outputs:
-                    #         parsed_outputs = outputbox.find('pre')
-                    #         for line in parsed_outputs.find_all('br'):
-                    #             line.replaceWith(test_line_delimiter)
-                    #         real_output_file.write(parsed_outputs.text)
-                outputs = parsed_html.body.findAll(
-                    'div', attrs={'class': 'output'})
-                with open(outputfile, 'w') as real_output_file:
-                    for outputbox in outputs:
-                        parsed_outputs = outputbox.find('pre')
-                        for line in parsed_outputs.find_all('br'):
-                            line.replaceWith(test_line_delimiter)
-                        real_output_file.write(parsed_outputs.text)
+                    outputs = parsed_html.body.findAll(
+                        'div', attrs={'class': 'output'})
+                    with open(outputfile, 'w') as real_output_file:
+                        for outputbox in outputs:
+                            parsed_outputs = outputbox.find('pre')
+                            for line in parsed_outputs.find_all('br'):
+                                line.replaceWith(test_line_delimiter)
+                            real_output_file.write(parsed_outputs.text)
+                # outputs = parsed_html.body.findAll(
+                #     'div', attrs={'class': 'output'})
+                # with open(outputfile, 'w') as real_output_file:
+                #     for outputbox in outputs:
+                #         parsed_outputs = outputbox.find('pre')
+                #         for line in parsed_outputs.find_all('br'):
+                #             line.replaceWith(test_line_delimiter)
+                #         real_output_file.write(parsed_outputs.text)
 
         except Exception as err:
             print("Something went wrong while parsing input/output.")

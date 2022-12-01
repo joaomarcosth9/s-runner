@@ -40,6 +40,8 @@ file_name, file_extension = path_to_file.split('/')[-1].split('.')
 
 try:
     if problem_url:
+        print("Currently disabled.")
+        exit(0)
         # If the -p flag is enabled, almost all other flags will be overwritten by those below,
         # the file will be runned after compiling and test cases will be scrapped from the online judge
         want_to_run_after_compiling = True
