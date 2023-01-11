@@ -21,13 +21,12 @@ fi
 echo -e "\n$ast Starting install!\n"
 sleep 1
 
-if [[ -d "/opt" ]]
+if [[ ! -d "/opt" ]]
 then
-    cd /opt
-else
     sudo mkdir /opt
-    cd /opt
 fi
+
+cd /opt
 
 if [[ -d "/opt/s-runner" ]]
 then
@@ -39,7 +38,7 @@ sudo chmod +x s-runner/src/s.py
 
 if [[ -f "/usr/bin/s" ]]
 then
-    sudo rm -rf /usr/bin/s
+    sudo rm -f /usr/bin/s
 fi
 
 sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
