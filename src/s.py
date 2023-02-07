@@ -66,11 +66,11 @@ try:
     # Currently supports C++,C, Python and Ruby, but it's really easy to add new languages.
     if file_extension == 'cpp':
         if cpp_fast_compiling:
-            command = 'g++ -std=c++17 -O2 -w '
+            command = 'g++ -std=c++20 -O2 -w '
         else:
             # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
             # one, change it. If you don't, you can just leave as it is.
-            command = 'g++ -std=c++17 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result ' \
+            command = 'g++ -std=c++20 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result ' \
                       '-Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover ' \
                       '-DLOCAL_DEBUG '
 
