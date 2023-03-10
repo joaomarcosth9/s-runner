@@ -74,8 +74,7 @@ try:
             # one, change it. If you don't, you can just leave as it is.
             command = 'g++ -std=c++' + str(cpp_version) + ' -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result ' \
                 '-Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover ' \
-                ' -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 '\
-                ' -Wduplicated-cond -Wcast-qual -Wcast-align -DLOCAL_DEBUG '
+                ' -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG '
 
     elif file_extension == 'c':
         command = 'gcc -lm '
