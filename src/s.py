@@ -65,7 +65,7 @@ try:
                 inputs_list.append(problem_id+'.in'+str(i))
 
     # Now it's just filetype verification.
-    # Currently supports C++,C, Python and Ruby, but it's really easy to add new languages.
+    # Currently supports C++,C, Python, Ruby and Haskell, but it's really easy to add new languages.
     if file_extension == 'cpp':
         if cpp_fast_compiling:
             command = 'g++ -std=c++' + str(cpp_version) + ' -O2 -w '
