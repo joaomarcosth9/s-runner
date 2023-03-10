@@ -16,6 +16,7 @@ parser.add_argument('-r', '--run', action='store_true', help='run the executable
 parser.add_argument('-f', '--fast', action='store_true', help='compile with less debugging flags (cpp only)')
 parser.add_argument('-i', '--inputs', nargs='+', default=None, help='input files (should be located at /tmp/)')
 parser.add_argument('-p', '--problem', default=None, help='problem URL for automatic testing (codeforces and atcoder)')
+parser.add_argument('-std', '--stdc++', default=17, help='C++ version')
 args = vars(parser.parse_args())
 
 # Putting command line arguments into variables
@@ -24,6 +25,7 @@ want_to_run_after_compiling = args['run']
 cpp_fast_compiling = args['fast']  # less g++ parameters (faster, but less safe)
 inputs_list = args['inputs']
 problem_url = args['problem']
+cpp_version = args['stdc++']
 s_runner_working_directory = '/tmp/'  # directory to throw compiled binaries, inputs and etc
 is_compiled_language = 1  # will make more sense later
 command = ""
@@ -66,13 +68,14 @@ try:
     # Currently supports C++,C, Python and Ruby, but it's really easy to add new languages.
     if file_extension == 'cpp':
         if cpp_fast_compiling:
-            command = 'g++ -std=c++20 -O2 -w '
+            command = 'g++ -std=c++' + str(cpp_version) + ' -O2 -w '
         else:
             # The "DLOCAL_DEBUG" flag is used for my debugging template, if you have
             # one, change it. If you don't, you can just leave as it is.
-            command = 'g++ -std=c++20 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result ' \
-                      '-Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover ' \
-                      '-DLOCAL_DEBUG '
+            command = 'g++ -std=c++' + str(cpp_version) + ' -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result ' \
+                '-Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover ' \
+                ' -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 '\
+                ' -Wduplicated-cond -Wcast-qual -Wcast-align -DLOCAL_DEBUG '
 
     elif file_extension == 'c':
         command = 'gcc -lm '
@@ -91,7 +94,7 @@ try:
 
     else:
         print("Filetype not supported.")
-    
+
     if is_compiled_language:
         if utils.compile_file(command, path_to_file, s_runner_working_directory, file_name) == 1:
             exit(1)
