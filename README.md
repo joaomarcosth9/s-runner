@@ -10,7 +10,8 @@ I don't like to have the binaries of my programs in the same directory as the so
 ## Usage
 Help:
 ```
-usage: s [-h] [-r] [-f] [-i INPUTS [INPUTS ...]] [-p PROBLEM] path
+usage: s [-h] [-c] [-f] [-i INPUTS [INPUTS ...]] [-p PROBLEM] [-std STDC++]
+            path
 
 s-runner by joaomarcosth9
 
@@ -19,22 +20,23 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  -r, --run             run the executable after compiling (default: False)
+  -c, --compile         just compile the file (default: False)
   -f, --fast            compile with less debugging flags (cpp only) (default:
                         False)
   -i INPUTS [INPUTS ...], --inputs INPUTS [INPUTS ...]
-                        input files (should be located at /tmp/) (default:
-                        None)
+                        list of input files (default: None)
   -p PROBLEM, --problem PROBLEM
                         problem URL for automatic testing (codeforces and
                         atcoder) (default: None)
+  -std STDC++, --stdc++ STDC++
+                        C++ version (default: 20)
 ```
 ## Examples:
 ``` 
-> s foo.cpp                         # Just compile to /tmp/foo
-> s foo.cpp -r                      # Compile and run
-> s foo.cpp -r -i foo.in            # Compile and run with /tmp/foo.in as input (with inputs, -r can be ommited)
-> s foo.cpp -r -i foo.in bar.in     # Compile and run with /tmp/foo.in and /tmp/bar.in as input
+> s foo.cpp                         # Compile to /tmp/foo and run
+> s foo.cpp -c                      # Just compile
+> s foo.cpp -i foo.in               # Compile and run with /tmp/foo.in as input
+> s foo.cpp -i foo.in bar.in        # Compile and run with /tmp/foo.in and /tmp/bar.in as input
 ```
 ### Online platforms testing (CURRENTLY DISABLED)
 ```
