@@ -5,6 +5,7 @@ ast="[*]"
 error="[X]"
 
 echo -e "\n$ast Starting uninstall.\n"
+
 sleep 1
 
 cd /opt
