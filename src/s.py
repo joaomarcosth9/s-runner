@@ -96,7 +96,7 @@ try:
     else:
         interpreter = languages['interpreted'][file_extension][OS]
 
-    utils.run(file_name, s_runner_working_directory, inputs_list, interpreter)
+    utils.run(file_name, path_to_file, inputs_list, interpreter)
 
 except Exception as error:
     system("/bin/rm -rf /tmp/s-runner/*")
