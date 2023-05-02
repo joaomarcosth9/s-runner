@@ -4,10 +4,9 @@
 import argparse
 import json
 import platform
+from os import mkdir, system
 from os.path import exists
 from pathlib import Path
-from platform import system
-from os import mkdir, system
 
 # local modules imports
 import utils
@@ -18,7 +17,7 @@ parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
 parser.add_argument('path', help='path to the source code file')
 parser.add_argument('-c', '--compile', action='store_true', help='just compile the file')
 parser.add_argument('-f', '--fast', action='store_true', help='compile with less debugging flags (cpp only)')
-parser.add_argument('-i', '--inputs', nargs='+', default=None, help='path to input files')
+parser.add_argument('-i', '--inputs', nargs='+', default=None, help='list of input files')
 parser.add_argument('-p', '--problem', default=None, help='problem URL for automatic testing (codeforces and atcoder)')
 parser.add_argument('-std', '--stdc++', default=20, help='C++ version')
 args = vars(parser.parse_args())
@@ -30,7 +29,7 @@ cpp_fast_compiling = args['fast']  # less g++ parameters (faster, but less safe)
 inputs_list = args['inputs']
 problem_url = args['problem']
 cpp_version = args['stdc++']
-s_runner_working_directory = '/tmp/'  # directory to throw compiled binaries, inputs and etc
+s_runner_working_directory = '/tmp/'  # directory to throw compiled binaries
 is_compiled_language = 1  # will make more sense later
 command = ""
 interpreter = ""
@@ -96,7 +95,7 @@ try:
     else:
         interpreter = languages['interpreted'][file_extension][OS]
 
-    utils.run(file_name, path_to_file, inputs_list, interpreter)
+    utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
 
 except Exception as error:
     system("/bin/rm -rf /tmp/s-runner/*")
