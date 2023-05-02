@@ -54,23 +54,9 @@ Requirements:
 pip install -r https://raw.github.com/joaomarcosth9/s-runner/main/requirements.txt
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/install.sh)"
 ```
-Or just:
-```
-cd /opt
-sudo git clone https://github.com/joaomarcosth9/s-runner
-sudo chmod +x s-runner/src/s.py
-sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
-```
-
 ## Uninstall
 ```
 bash -c "$(curl -fsSL https://raw.github.com/joaomarcosth9/s-runner/main/uninstall.sh)"
 ```
-Or just:
-```
-sudo rm -rf /opt/s-runner
-sudo rm -f /usr/bin/s
-```
-
 ## Notes
 - You may need to change the first line of `src/s.py` to the path of your python interpreter. Just ensure that the `pip` command in your `$PATH` is related to the correct python interpreter.
