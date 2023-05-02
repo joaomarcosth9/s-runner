@@ -1,0 +1,26 @@
+{
+  "compiled": {
+    "cpp": {
+      "default": {
+        "linux": "g++ -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG VERSION",
+        "mac": "g++-12 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG"
+      },
+      "fast": {
+        "linux": "g++ -O2",
+        "mac": "g++-12 -O2 "
+      }
+    },
+    "c": {
+      "default": {
+        "linux": "gcc -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG",
+        "mac": "gcc-12 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG"
+      }
+    }
+  },
+  "interpreted": {
+    "python": {
+      "linux": "python3 ",
+      "mac": "python3 "
+    }
+  }
+}

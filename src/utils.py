@@ -6,10 +6,11 @@ def placeholder_for_testcases():
     print("------------------")
 
 
-def compile_file(command_to_compile, full_path_to_file, destination_directory, short_name):
-    system('rm -f ' + destination_directory + short_name)
-    system(command_to_compile + full_path_to_file + ' -o ' + destination_directory + short_name)
-    if not exists(destination_directory+short_name):
+def compile_file(compiler, full_path_to_file, destination_directory, short_name):
+    system('/bin/rm -f ' + destination_directory + short_name)
+    system(compiler + full_path_to_file + ' -o ' + destination_directory + short_name)
+    if not exists(destination_directory + short_name):
+        print("Compilation failed.")
         return 1
     return 0
 

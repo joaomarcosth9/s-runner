@@ -26,21 +26,33 @@ then
     sudo mkdir /opt
 fi
 
-cd /opt
-
 if [[ -d "/opt/s-runner" ]]
 then
-    sudo rm -rf /opt/s-runner
+    sudo /bin/rm -rf /opt/s-runner
 fi
+
+cd /opt
 
 sudo git clone https://github.com/joaomarcosth9/s-runner/
 sudo chmod +x s-runner/src/s.py
 
 if [[ -f "/usr/bin/s" ]]
 then
-    sudo rm -f /usr/bin/s
+    sudo /bin/rm -f /usr/bin/s
 fi
 
-sudo ln -s /opt/s-runner/src/s.py /usr/bin/s
+if [[ -f "/usr/local/bin/s" ]]
+then
+    sudo /bin/rm -f /usr/local/bin/s
+fi
+
+sudo ln -s /opt/s-runner/src/s.py /usr/local/bin/s
+
+if [[ -f "$HOME/.s-runner.json" ]]
+then
+    /bin/rm -f $HOME/.s-runner.json
+fi
+
+cp /opt/s-runner/languages.json $HOME/.s-runner.json
 
 echo -e "\n$ok Installed at /opt/s-runner!\n"
