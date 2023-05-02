@@ -49,9 +49,9 @@ else:
 if inputs_list:
     run_file = True
 
-HOME = system('echo $HOME')
+HOME = str(system('echo $HOME'))
 
-with open('HOME/.s-runner.json', 'r') as languages:
+with open(HOME + '/.s-runner.json', 'r') as languages:
     languages = json.load(languages)
 
 try:
