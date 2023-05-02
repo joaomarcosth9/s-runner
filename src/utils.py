@@ -8,7 +8,7 @@ def placeholder_for_testcases():
 
 def compile_file(compiler, full_path_to_file, destination_directory, short_name):
     system('/bin/rm -f ' + destination_directory + short_name)
-    system(compiler + ' ' + full_path_to_file + ' -o ' + destination_directory + short_name)
+    system(compiler + full_path_to_file + ' -o ' + destination_directory + short_name)
     if not exists(destination_directory + short_name):
         print("Compilation failed.")
         return 1
