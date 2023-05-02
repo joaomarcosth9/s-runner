@@ -41,6 +41,11 @@ then
     sudo /bin/rm -f /usr/bin/s
 fi
 
+if [[ ! -d "/usr/local/bin" ]]
+then
+    sudo mkdir /usr/local/bin
+fi
+
 if [[ -f "/usr/local/bin/s" ]]
 then
     sudo /bin/rm -f /usr/local/bin/s
