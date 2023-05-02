@@ -1,46 +1,11 @@
-import requests
 from os.path import exists
+from bs4 import BeautifulSoup
 
-try:
-    from BeautifulSoup import BeautifulSoup  # not sure if this is needed
-except ImportError:
-    from bs4 import BeautifulSoup
 
-bar = "___s-runner___"  # what will replace the '/' character in URL parsing
+from url import parse, check_page_cache
+
+
 s_runner_working_directory = "/tmp/s-runner/"
-test_line_delimiter = '\n'
-
-
-def parse(url):
-    url = url.split('//')[-1]  # remove http(s) protocol
-    url = url.replace('/', bar)
-    return url
-
-
-def unparse(url):
-    url = url.replace(bar, '/')
-    url = "http://" + url  # add http protocol
-    return url
-
-
-def check_page_cache(problem_id):
-    # To speed up and not having to access atcoder.jp every time,
-    # the problem page is cached. This function verifies if it's already
-    # cached, and if it isn't, it does.
-    full_problem_id = s_runner_working_directory + problem_id
-    path = full_problem_id + '.html'
-    if not exists(path):
-        try:
-            problem_page = requests.get(unparse(problem_id))
-            if problem_page.status_code != 200:
-                raise Exception("Can't reach site URL.")
-            html = problem_page.text
-            with open(path, 'w') as file:
-                file.write(html)
-        except Exception as error:
-            print("Something went wrong while checking atcoder page.")
-            print(error)
-            exit(1)
 
 
 def check_input_output_cache(problem_id):
@@ -50,7 +15,7 @@ def check_input_output_cache(problem_id):
     inputfile = full_problem_id + '.input'
     outputfile = full_problem_id + '.output'  # Currently I'm not using the output for nothing.
     if not exists(inputfile) or not exists(outputfile):
-        check_page_cache(problem_id)
+        check_page_cache(problem_id, 'atcoder')
         page_path = full_problem_id + '.html'
         try:
             with open(page_path, 'r') as problem_page_html:
@@ -81,16 +46,6 @@ def check_input_output_cache(problem_id):
             print("Something went wrong while parsing input/output.")
             print(err)
             exit(1)
-
-
-# Future feature
-# def is_codeforces_file(file):
-#     with open(file, 'r') as source_code:
-#         if 'codeforces' in file.readlines()[0]:
-#             return True
-#         else:
-#             return False
-
 
 if __name__ == '__main__':
     # just for testing
