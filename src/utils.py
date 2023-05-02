@@ -19,7 +19,7 @@ def run(file_name, directory, inputs_list, interpreter=""):
     if interpreter:
         command = interpreter + " " + file_name
     else:
-        command = directory + " " + file_name
+        command = directory + file_name
 
     if inputs_list:
         if len(inputs_list) > 1:
