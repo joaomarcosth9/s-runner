@@ -47,6 +47,7 @@ def check_input_output_cache(problem_id):
             print(err)
             exit(1)
 
+
 if __name__ == '__main__':
     # just for testing
     url = input()

@@ -10,7 +10,7 @@ from pathlib import Path
 
 # local modules imports
 import utils
-import url
+from url import parse
 
 # command line arguments
 parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
@@ -65,13 +65,13 @@ try:
         if not exists('/tmp/s-runner'):
             mkdir('/tmp/s-runner')
         s_runner_working_directory = '/tmp/s-runner/'
+        problem_id = parse(problem_url)
         if 'codeforces' in problem_url:
-            ONLINE_JUDGE = 'codeforces'
+            from codeforces import check_input_output_cache
         elif 'atcoder' in problem_url:
-            ONLINE_JUDGE = 'atcoder'
+            from atcoder import check_input_output_cache
         else:
             raise Exception("Invalid URL.")
-        problem_id = parse(problem_url)
         check_input_output_cache(problem_id)
         inputs_list = []
         with open(s_runner_working_directory + problem_id + '.input', 'r') as number_of_inputs:
