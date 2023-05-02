@@ -4,6 +4,7 @@
 import argparse
 import json
 from os.path import exists
+from pathlib import Path
 from os import mkdir, system
 
 # local modules imports
@@ -49,7 +50,7 @@ else:
 if inputs_list:
     run_file = True
 
-HOME = str(system('echo $HOME'))
+HOME = str(Path.home())
 
 with open(HOME + '/.s-runner.json', 'r') as languages:
     languages = json.load(languages)
