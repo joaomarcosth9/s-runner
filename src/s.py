@@ -91,10 +91,11 @@ try:
         command = languages['compiled'][file_extension][TYPE][OS]
         if file_extension == 'cpp':
             command = command + ' --std=c++' + str(cpp_version)
-        utils.compile_file(command, path_to_file, s_runner_working_directory, file_name)
+        if utils.compile_file(command, path_to_file, s_runner_working_directory, file_name):
+            exit(1)
+        path_to_file = file_name
     else:
         interpreter = languages['interpreted'][file_extension][OS]
-
     utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
 
 except Exception as error:
