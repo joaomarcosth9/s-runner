@@ -91,7 +91,7 @@ try:
     if languages['compiled'].get(file_extension):
         command = languages['compiled'][file_extension][TYPE][OS]
         if file_extension == 'cpp':
-            command = command.append(' --std=c++' + cpp_version)
+            command = command + ' --std=c++' + cpp_version
         utils.compile_file(command, path_to_file, s_runner_working_directory, file_name)
     else:
         interpreter = languages['interpreted'][file_extension][OS]
