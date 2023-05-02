@@ -3,8 +3,10 @@
 # official modules imports
 import argparse
 import json
+import platform
 from os.path import exists
 from pathlib import Path
+from platform import system
 from os import mkdir, system
 
 # local modules imports
@@ -80,13 +82,13 @@ except Exception as error:
     print(error)
     exit(1)
 
-if system('uname -s') == 'Darwin':
+if platform.system() == 'Darwin':
     OS = 'mac'
 else:
     OS = 'linux'
 
 try:
-    if languages['compiled'].count(file_extension):
+    if languages['compiled'].get(file_extension):
         command = languages['compiled'][file_extension][TYPE][OS]
         if file_extension == 'cpp':
             command = command.append(' --std=c++' + cpp_version)

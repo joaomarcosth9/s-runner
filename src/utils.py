@@ -17,9 +17,9 @@ def compile_file(compiler, full_path_to_file, destination_directory, short_name)
 
 def run(file_name, directory, inputs_list, interpreter=""):
     if interpreter:
-        command = interpreter + file_name
+        command = interpreter + " " + file_name
     else:
-        command = directory + file_name
+        command = directory + " " + file_name
 
     if inputs_list:
         if len(inputs_list) > 1:
