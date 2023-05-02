@@ -94,8 +94,11 @@ try:
         if utils.compile_file(command, path_to_file, s_runner_working_directory, file_name):
             exit(1)
         path_to_file = file_name
-    else:
+    elif languages['interpreted'].get(file_extension):
         interpreter = languages['interpreted'][file_extension][OS]
+    else:
+        raise Exception("Language not supported.")
+
     utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
 
 except Exception as error:
