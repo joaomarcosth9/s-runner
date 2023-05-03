@@ -38,7 +38,7 @@ options:
 > s foo.cpp -i foo.in               # Compile and run with /tmp/foo.in as input
 > s foo.cpp -i foo.in bar.in        # Compile and run with /tmp/foo.in and /tmp/bar.in as input
 ```
-### Online platforms testing (CURRENTLY DISABLED)
+### Online platforms testing
 ```
 > s wm.cpp -p codeforces.com/problemset/problem/4/A    # Compile and run with CF testcases as input
 > s vacation.cpp -p atcoder.jp/contests/dp/tasks/dp_c  # Compile and run with AtCoder testcases as input
