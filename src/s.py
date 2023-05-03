@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description='s-runner by joaomarcosth9',
 parser.add_argument('path', help='path to the source code file')
 parser.add_argument('-c', '--compile', action='store_true', help='just compile the file')
 parser.add_argument('-f', '--fast', action='store_true', help='compile with less debugging flags (cpp only)')
-parser.add_argument('-i', '--inputs', nargs='+', default=None, help='list of input files')
+parser.add_argument('-i', '--inputs', nargs='+', default=None, help='list of input files (should be at /tmp)')
 parser.add_argument('-p', '--problem', default=None, help='problem URL for automatic testing (codeforces and atcoder)')
 parser.add_argument('-std', '--stdc++', default=20, help='C++ version')
 args = vars(parser.parse_args())

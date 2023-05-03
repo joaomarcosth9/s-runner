@@ -34,7 +34,7 @@ options:
 ## Examples:
 ``` 
 > s foo.cpp                         # Compile to /tmp/foo and run
-> s foo.cpp -c                      # Just compile
+> s foo.cpp -c                      # Just compile to /tmp/foo
 > s foo.cpp -i foo.in               # Compile and run with /tmp/foo.in as input
 > s foo.cpp -i foo.in bar.in        # Compile and run with /tmp/foo.in and /tmp/bar.in as input
 ```
