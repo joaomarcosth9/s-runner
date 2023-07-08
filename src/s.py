@@ -100,7 +100,8 @@ try:
     else:
         raise Exception("Language not supported.")
 
-    utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
+    if run_file:
+        utils.run(path_to_file, s_runner_working_directory, inputs_list, interpreter)
 
 except Exception as error:
     system("/bin/rm -rf /tmp/s-runner/*")
