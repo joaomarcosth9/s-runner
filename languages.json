@@ -3,11 +3,11 @@
     "cpp": {
       "default": {
         "linux": "g++ -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG VERSION ",
-        "mac": "g++-12 -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG "
+        "mac": "c++ -Wshadow -O2 -Wfatal-errors -Wall -Wextra -Wno-unused-result -Wno-unused-variable -fno-sanitize-recover -Wformat=2 -Wfloat-equal -Wshift-overflow -Wcast-qual -Wcast-align -DLOCAL_DEBUG "
       },
       "fast": {
         "linux": "g++ -O2 ",
-        "mac": "g++-12 -O2 "
+        "mac": "c++ -O2 "
       }
     },
     "c": {
