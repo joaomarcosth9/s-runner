@@ -15,8 +15,8 @@ def check_input_output_cache(problem_id):
     # and if they aren't, it does.
     full_problem_id = s_runner_working_directory + problem_id
     inputfile = full_problem_id + '.input'
-    outputfile = full_problem_id + '.output'  # Currently I'm not using the output for nothing.
-    if not exists(inputfile) or not exists(outputfile):
+    outputfile = full_problem_id + '.output'  # Currently I'm not using the output at all
+    if not exists(inputfile) or not exists(outputfile) or True:
         check_page_cache(problem_id, 'codeforces')
         page_path = full_problem_id + '.html'
         try:
@@ -48,7 +48,7 @@ def check_input_output_cache(problem_id):
                             parsed_outputs = outputbox.find('pre')
                             for line in parsed_outputs.find_all('br'):
                                 line.replaceWith(test_line_delimiter)
-                            real_output_file.write(parsed_outputs.text)
+                            real_output_file.write(parsed_outputs.text.strip() + test_line_delimiter)
                 else:
                     all_input_boxes = parsed_html.body.findAll(
                         'div', attrs={'class': 'input'})

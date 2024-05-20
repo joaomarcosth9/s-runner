@@ -13,7 +13,7 @@ def check_input_output_cache(problem_id):
     # and if they aren't, it does.
     full_problem_id = s_runner_working_directory + problem_id
     inputfile = full_problem_id + '.input'
-    outputfile = full_problem_id + '.output'  # Currently I'm not using the output for nothing.
+    outputfile = full_problem_id + '.output'  # Currently I'm not using the output at all
     if not exists(inputfile) or not exists(outputfile):
         check_page_cache(problem_id, 'atcoder')
         page_path = full_problem_id + '.html'
